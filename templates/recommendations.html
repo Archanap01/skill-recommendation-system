@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block title %}Recommended Courses{% endblock %}
+{% block content %}
+<h3 class="mb-4">Recommended Courses</h3>
+{% if courses %}
+<table class="table table-bordered table-hover align-middle">
+    <thead class="table-light">
+        <tr>
+            <th>Course Name</th>
+            <th>Platform</th>
+            <th>Timeline</th>
+            <th>Cost</th>
+            <th>Level</th>
+            <th>Instructor</th>
+            <th>Link</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for course in courses %}
+        <tr>
+            <td class="fw-semibold">{{ course['course_name'] }}</td>
+            <td>{{ course['platform'] }}</td>
+            <td>{{ course['timeline'] }}</td>
+            <td>{{ course['cost'] }}</td>
+            <td>{{ course['level'] }}</td>
+            <td>{{ course['instructor'] }}</td>
+            <td><a href="{{ course['url'] }}" target="_blank" class="btn btn-primary btn-sm">Visit</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-warning">No matching courses found for your selected skills and filters.</div>
+{% endif %}
+<a href="{{ url_for('index') }}" class="btn btn-secondary mt-3">Back to Skill Selection</a>
+{% endblock %}

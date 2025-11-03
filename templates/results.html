@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block title %}Recommended Courses{% endblock %}
+
+{% block content %}
+<h3 class="mb-4">Recommended Courses</h3>
+<div class="row">
+  {% if results %}
+    {% for course in results %}
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">{{ course[0] }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ course[1] }}</h6>
+            <p class="card-text">
+              <strong>Level:</strong> {{ course[2] }}<br>
+              <strong>Cost:</strong> {{ course[3] }}<br>
+              <strong>Language:</strong> {{ course[4] }}
+            </p>
+            <a href="{{ course[5] }}" class="btn btn-primary" target="_blank">Visit Course</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col-12">
+      <div class="alert alert-warning" role="alert">
+        No courses matched your criteria. Please try selecting different filters.
+      </div>
+    </div>
+  {% endif %}
+</div>
+<a href="/" class="btn btn-secondary">Back to Skill Selection</a>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+{% block title %}Select Skills{% endblock %}
+{% block content %}
+<div class="card p-4 my-4 shadow-sm">
+    <h2 class="mb-4">Select Your Skills and Preferences</h2>
+    <form action="{{ url_for('recommend') }}" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+
+        <div class="mb-3">
+            {{ form.interests.label(class="form-label") }}
+            <select name="{{ form.interests.name }}" id="{{ form.interests.id }}" multiple class="form-select" size="6" aria-describedby="skillsHelp">
+                {% for val, label in form.interests.choices %}
+                <option value="{{ val }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+            <small id="skillsHelp" class="form-text text-muted">Hold Ctrl (Cmd on Mac) to select multiple skills.</small>
+            {% for error in form.interests.errors %}
+            <div class="text-danger small mt-1">{{ error }}</div>
+            {% endfor %}
+        </div>
+
+        <div class="mb-3">
+            {{ form.cost.label(class="form-label") }}
+            {{ form.cost(class="form-select") }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.level.label(class="form-label") }}
+            {{ form.level(class="form-select") }}
+        </div>
+
+        {{ form.submit(class="btn btn-success px-4 py-2") }}
+    </form>
+</div>
+{% endblock %}
